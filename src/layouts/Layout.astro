@@ -1,0 +1,83 @@
+---
+import { ViewTransitions } from "astro:transitions";
+import { SEO } from "astro-seo";
+import { AstroFont } from "astro-font";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+
+interface Props {
+  seoTitle: string,
+  seoDescription: string,
+  ogImage?: string,
+}
+
+const { seoTitle, seoDescription, ogImage } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<AstroFont
+      config={[
+        {
+          name: "Poppins",
+          src: [
+            {
+              style: 'extralight',
+              weight: '200',
+              path: 'https://fonts.gstatic.com/s/poppins/v21/pxiByp8kv8JHgFVrLFj_Z1xlFQ.woff2'
+            },
+            {
+              style: 'regular',
+              weight: '400',
+              path: 'https://fonts.gstatic.com/s/poppins/v21/pxiEyp8kv8JHgFVrJJfecg.woff2'
+            },
+            {
+              style: 'semibold',
+              weight: '600',
+              path: 'https://fonts.gstatic.com/s/poppins/v21/pxiByp8kv8JHgFVrLEj6Z1xlFQ.woff2'
+            },
+            {
+              style: 'bold',
+              weight: '700',
+              path: 'https://fonts.gstatic.com/s/poppins/v21/pxiByp8kv8JHgFVrLCz7Z1xlFQ.woff2'
+            },
+          ],
+          preload: true,
+		  selector: "body",
+          display: "swap",
+          fallback: "serif",
+        },
+      ]}
+    />
+    <SEO
+      title={seoTitle}
+      description={seoDescription}
+      openGraph={{
+        basic: {
+          title: `${seoTitle}`,
+          type: "website",
+          image: `${ogImage}`,
+		  url: `${Astro.url}`,
+        },
+      }}
+      extend={{
+        // extending the default link tags
+        link: [{ rel: "icon", href: "/favicon.svg" }],
+        // extending the default meta tags
+        meta: [
+          { name: "twitter:image", content: `${ogImage}` },
+          { name: "twitter:title", content: `${seoTitle}` },
+          { name: "twitter:description", content: `${seoDescription}` },
+        ],
+      }}
+    />
+    <ViewTransitions />
+  </head>
+  <body>
+	<Header />
+    <slot />
+	<Footer />
+  </body>
+</html>
