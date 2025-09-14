@@ -1,5 +1,5 @@
 ---
-import { ViewTransitions } from "astro:transitions";
+import "@/styles/global.css";
 import { SEO } from "astro-seo";
 import { AstroFont } from "astro-font";
 import Header from "@components/Header.astro";
@@ -73,7 +73,6 @@ const { seoTitle, seoDescription, ogImage } = Astro.props;
         ],
       }}
     />
-    <ViewTransitions />
   </head>
   <body>
 	<Header />
